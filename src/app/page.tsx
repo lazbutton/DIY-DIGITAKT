@@ -1,65 +1,95 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  displayName,
+  getProjectTree,
+  type ProjectNode,
+} from "@/lib/project-tree";
+
+function fileHref(relativePath: string) {
+  return `/file/${relativePath
+    .split("/")
+    .map((segment) => encodeURIComponent(segment))
+    .join("/")}`;
+}
+
+function Tree({ nodes, depth = 0 }: { nodes: ProjectNode[]; depth?: number }) {
+  return (
+    <ul className="space-y-1">
+      {nodes.map((node) => (
+        <li key={node.relativePath}>
+          <div
+            className="group flex items-center gap-3 rounded-xl px-3 py-2.5 font-mono text-[15px] transition-colors hover:bg-white/[0.035]"
+            style={{ paddingLeft: `${depth * 1.4 + 0.75}rem` }}
+          >
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-neutral-900 bg-neutral-950 text-[10px] text-neutral-600 transition-colors group-hover:border-neutral-800 group-hover:text-neutral-400">
+              {node.type === "directory" ? "↳" : "md"}
+            </span>
+            {node.type === "directory" ? (
+              <span className="text-neutral-200">
+                {displayName(node.name, node.type)}
+              </span>
+            ) : (
+              <Link
+                href={fileHref(node.relativePath)}
+                className="text-neutral-400 transition-colors group-hover:text-neutral-100"
+              >
+                {displayName(node.name, node.type)}
+              </Link>
+            )}
+          </div>
+
+          {node.type === "directory" && node.children?.length ? (
+            <Tree nodes={node.children} depth={depth + 1} />
+          ) : null}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function Home() {
+  const tree = getProjectTree();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <section className="animate-in fade-in duration-500">
+      <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
+        <header className="relative overflow-hidden rounded-[2rem] border border-neutral-900 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] p-8 sm:p-10">
+          <div className="absolute right-6 top-6 h-2 w-2 rounded-full bg-neutral-700" />
+
+          <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.28em] text-neutral-500">
+            Markdown archive
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+          <h1 className="max-w-2xl text-balance text-4xl font-medium leading-[0.96] tracking-[-0.06em] text-neutral-50 sm:text-6xl">
+            Documentation DIGITAKT
+          </h1>
+
+          <p className="mt-8 max-w-md text-sm leading-6 text-neutral-500">
+            Fichiers publics issus de `website/content`.
+          </p>
+        </header>
+
+        <aside className="overflow-hidden rounded-[2rem] border border-neutral-900 bg-neutral-950/25">
+          <div className="flex items-center justify-between border-b border-neutral-900 px-5 py-4">
+            <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-neutral-500">
+              Index
+            </h2>
+            <span className="font-mono text-[11px] text-neutral-700">
+              .md / .mdx
+            </span>
+          </div>
+
+          <div className="max-h-[33rem] overflow-y-auto p-3">
+            {tree.length ? (
+              <Tree nodes={tree} />
+            ) : (
+              <p className="px-3 py-2 font-mono text-[15px] text-neutral-600">
+                Aucun fichier
+              </p>
+            )}
+          </div>
+        </aside>
+      </div>
+    </section>
   );
 }
