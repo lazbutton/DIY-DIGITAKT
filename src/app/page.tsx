@@ -52,21 +52,18 @@ export default function Home() {
 
   return (
     <section className="animate-in fade-in duration-500">
-      <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
+      <div className="grid gap-5 lg:grid-cols-[1fr_300px]">
         <header className="relative overflow-hidden rounded-[2rem] border border-neutral-900 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.08),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01))] p-8 sm:p-10">
           <div className="absolute right-6 top-6 h-2 w-2 rounded-full bg-neutral-700" />
 
           <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.28em] text-neutral-500">
-            Markdown archive
+            Laz Présente
           </p>
 
-          <h1 className="max-w-2xl text-balance text-4xl font-medium leading-[0.96] tracking-[-0.06em] text-neutral-50 sm:text-6xl">
-            Documentation DIGITAKT
+          <h1 className="max-w-2xl text-balance text-3xl font-bold leading-[1] tracking-[-0.055em] text-neutral-50 sm:text-4xl">
+            DIGITAKT DIY 
+            DOCUMENTATION.
           </h1>
-
-          <p className="mt-8 max-w-md text-sm leading-6 text-neutral-500">
-            Fichiers publics issus de `website/content`.
-          </p>
         </header>
 
         <aside className="overflow-hidden rounded-[2rem] border border-neutral-900 bg-neutral-950/25">
