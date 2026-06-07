@@ -11,6 +11,11 @@
   --border: #171717;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   color: var(--foreground);
   background:
@@ -23,6 +28,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 a {
@@ -36,10 +42,19 @@ a {
 
 /* Markdown ultra minimal & pro */
 .markdown {
-  max-width: 65ch;
+  max-width: 100%;
   color: #a3a3a3;
-  font-size: 1.0625rem; /* 17px */
-  line-height: 1.8;
+  font-size: 1rem;
+  line-height: 1.78;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 640px) {
+  .markdown {
+    max-width: 65ch;
+    font-size: 1.0625rem; /* 17px */
+    line-height: 1.8;
+  }
 }
 
 .markdown > *:first-child {
@@ -62,14 +77,14 @@ a {
 
 .markdown h1 {
   margin: 0 0 1.5rem;
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
 
 .markdown h2 {
   margin: 2.5rem 0 1rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
-  font-size: 1.4rem;
+  font-size: 1.25rem;
 }
 
 .markdown h3 {
@@ -112,7 +127,7 @@ a {
 .markdown ul,
 .markdown ol {
   margin: 1.25rem 0;
-  padding-left: 1.5rem;
+  padding-left: 1.25rem;
 }
 
 .markdown ul {
@@ -176,11 +191,20 @@ a {
   color: #a3a3a3;
 }
 
-.markdown table {
-  display: block;
+.markdown-table {
   width: 100%;
-  margin: 2rem 0;
+  max-width: calc(100vw - 2rem);
+  margin: 1.5rem 0;
   overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.markdown table {
+  width: max-content;
+  min-width: 100%;
   border-collapse: collapse;
   font-size: 0.95em;
 }
@@ -188,9 +212,11 @@ a {
 .markdown th,
 .markdown td {
   border-bottom: 1px solid var(--border);
-  padding: 0.75rem 1rem;
+  min-width: 9rem;
+  padding: 0.6rem 0.7rem;
   text-align: left;
   vertical-align: top;
+  white-space: nowrap;
 }
 
 .markdown th {
@@ -202,8 +228,29 @@ a {
   color: #a3a3a3;
 }
 
+.markdown tr:last-child td {
+  border-bottom: 0;
+}
+
 .markdown hr {
   margin: 3rem 0;
   border: 0;
   border-top: 1px solid var(--border);
+}
+
+.markdown img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .markdown h1 {
+    font-size: 2rem;
+  }
+
+  .markdown h2 {
+    font-size: 1.4rem;
+  }
 }

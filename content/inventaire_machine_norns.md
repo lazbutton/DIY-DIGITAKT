@@ -1,8 +1,6 @@
 # Inventaire — Ma machine Norns intégrée
 
-> Tout ce que je possède (ou ai commandé) qui sert à construire la machine, + ce qu'il reste à acquérir.
-
----
+Tout ce que je possède (ou ai commandé) qui sert à construire la machine, + ce qu'il reste à acquérir.
 
 ## 🧠 Le cerveau
 

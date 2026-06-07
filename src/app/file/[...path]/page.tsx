@@ -37,28 +37,37 @@ export default async function FilePage({
 
   return (
     <article className="animate-in fade-in duration-500">
-      <header className="mb-10 space-y-4">
+      <header className="mb-8 space-y-4 sm:mb-10">
         <Link
           href="/"
-          className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500 transition-colors hover:text-neutral-300"
+          className="group inline-flex min-h-10 items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500 transition-colors hover:text-neutral-300"
         >
           <span className="transition-transform group-hover:-translate-x-1">←</span>
           Index
         </Link>
 
-        <h1 className="font-mono text-sm text-neutral-400">
+        <h1 className="break-words font-mono text-xs leading-6 text-neutral-500 sm:text-sm">
           {displayPath}
         </h1>
       </header>
 
       {isMarkdownFile(file.name) ? (
         <div className="markdown">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              table: ({ children }) => (
+                <div className="markdown-table">
+                  <table>{children}</table>
+                </div>
+              ),
+            }}
+          >
             {file.content}
           </ReactMarkdown>
         </div>
       ) : (
-        <pre className="overflow-x-auto whitespace-pre-wrap rounded-lg border border-neutral-900 bg-[#050505] p-6 font-mono text-[13px] leading-relaxed text-neutral-400">
+        <pre className="overflow-x-auto whitespace-pre-wrap rounded-lg border border-neutral-900 bg-[#050505] p-4 font-mono text-[12px] leading-relaxed text-neutral-400 sm:p-6 sm:text-[13px]">
           {file.content}
         </pre>
       )}

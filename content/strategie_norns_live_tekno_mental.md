@@ -1,6 +1,6 @@
 # Strategie norns live tekno acid mental tribe
 
-Ce document transforme l'inventaire de la machine norns en feuille de route pratique pour construire un instrument de live complet, centre sur le son, les textures, les drones, les delays, les boucles et la tension progressive.
+Ce document transforme l'inventaire de la machine norns en feuille de route pratique pour construire un instrument de live complet, centré sur le son, les textures, les drones, les delays, les boucles et la tension progressive.
 
 Objectif principal : utiliser norns comme instrument sonore principal dans un setup tekno/tribe sombre, mental et hypnotique, avec l'Electribe comme maitre clock et sequenceur MIDI.
 
